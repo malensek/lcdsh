@@ -8,6 +8,10 @@ lcd_init() {
     port="${2}"
 
     exec 3<>/dev/tcp/${host}/${port}
+    if [[ ${?} -ne 0 ]]; then
+        echo_error "Could not connect to ${host}:${port}"
+        return 1
+    fi
 
     if [[ ${?} -eq 0 ]]; then
         echo "hello" >&3
