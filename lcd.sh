@@ -28,3 +28,12 @@ lcd_parse_info() {
     sed "s/.* ${2} \([0-9.]*\).*/\1/g" <<< "${1}"
 }
 
+lcd_get_response() {
+    timeout=0
+    if [[ -n ${1} ]]; then
+        timeout=${1}
+    fi
+    read -u 3 response
+    echo "${response}"
+}
+
