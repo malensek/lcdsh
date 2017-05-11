@@ -20,6 +20,8 @@ lcd_init() {
         echo "fail"
         return 1
     fi
+
+    echo "initialized!"
 }
 
 lcd_parse_info() {
