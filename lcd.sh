@@ -37,3 +37,15 @@ lcd_get_response() {
     echo "${response}"
 }
 
+echo_color() {
+    color="${1}"
+    shift 1
+    num_colors=$(tput colors 2> /dev/null)
+    if [[ ! -t 1 || ${num_colors} -lt 8 ]]; then
+        # Not a terminal; print without color
+        echo "${@}"
+        return 0
+    fi
+
+    echo -e $'\e[0;'${color}'m'${@}$'\e[0m'
+}
