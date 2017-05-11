@@ -35,6 +35,12 @@ lcd_get_response() {
     fi
     read -u 3 response
     echo "${response}"
+
+    if [[ "${response}" == "success" ]]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 echo_color() {
