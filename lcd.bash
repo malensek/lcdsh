@@ -55,3 +55,16 @@ echo_color() {
 
     echo -e $'\e[0;'${color}'m'${@}$'\e[0m'
 }
+
+echo_info() {
+    echo_color 34 "[>] ${@}"
+}
+
+echo_error() {
+    echo_color 31 "[X] ${@}"
+}
+
+die() {
+    echo_error "${@}"
+    exit 1
+}
