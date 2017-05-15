@@ -26,24 +26,60 @@ lcd_init() {
     fi
 
     echo "initialized!"
+    echo "screen_add s1" >&3
+    echo "widget_add s1 w1 string" >&3
+    echo "widget_add s1 w2 string" >&3
+    echo "widget_add s1 w3 string" >&3
+    echo "widget_add s1 w4 stringz" >&3
+
+#    while true; do
+#        response=$(lcd_get_response 1)
+#        if [[ ${?} -eq 3 ]]; then
+#            break
+#        fi
+#
+#    done
+
 }
 
 lcd_parse_info() {
     sed "s/.* ${2} \([0-9.]*\).*/\1/g" <<< "${1}"
 }
 
+lcd_msg_loop() {
+    while true; do
+        response=$(lcd_get_response)
+        if [[ ${?} -ne 0 ]]; then
+            echo "${response}"
+        fi
+    done
+}
+
 lcd_get_response() {
     timeout=0
+    response=""
+
     if [[ -n ${1} ]]; then
         timeout=${1}
+        read -u 3 -t "${timeout}" response
+        if [[ ${?} -eq 1 ]]; then
+            # Timed out
+            return 3
+        fi
+    else
+        read -u 3 response
     fi
-    read -u 3 response
+
     echo "${response}"
 
     if [[ "${response}" == "success" ]]; then
         return 0
-    else
+    elif [[ "${response}" =~ "^huh?" ]]; then
+        # Error
         return 1
+    else
+        # Other message (keypress etc)
+        return 2
     fi
 }
 
