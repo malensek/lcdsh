@@ -21,11 +21,10 @@ lcd_init() {
         export LCD_CELL_WIDTH=$(lcd_parse_info "${response}" "cellwid")
         export LCD_CELL_HEIGHT=$(lcd_parse_info "${response}" "cellhgt")
     else
-        echo "fail"
+        echo_error "Failed to initialize LCD connection!"
         return 1
     fi
 
-    echo "initialized!"
     echo "screen_add s1" >&3
     echo "widget_add s1 w1 string" >&3
     echo "widget_add s1 w2 string" >&3
@@ -40,6 +39,7 @@ lcd_init() {
 #
 #    done
 
+    echo_info "Initialized LCD session on ${host}:${port}"
 }
 
 lcd_parse_info() {
