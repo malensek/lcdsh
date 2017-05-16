@@ -102,6 +102,19 @@ lcd_show() {
     done
 }
 
+lcd_show_line() {
+    line_num="${1}"
+    text="${2}"
+
+    if [[ ! -t 0 ]]; then
+        # Text was piped into the function
+        text="$(cat 2> /dev/null)"
+    fi
+
+    echo "widget_set s1 w${line_num} 1 ${line_num} \"${text}\"" >&3
+    lcd_get_response
+}
+
 echo_color() {
     color="${1}"
     shift 1
