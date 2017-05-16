@@ -29,7 +29,7 @@ lcd_init() {
     echo "widget_add s1 w1 string" >&3
     echo "widget_add s1 w2 string" >&3
     echo "widget_add s1 w3 string" >&3
-    echo "widget_add s1 w4 stringz" >&3
+    echo "widget_add s1 w4 string" >&3
 
 #    while true; do
 #        response=$(lcd_get_response 1)
