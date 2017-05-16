@@ -83,6 +83,25 @@ lcd_get_response() {
     fi
 }
 
+lcd_show() {
+    text="${1}"
+
+    if [[ ! -t 0 ]]; then
+        # Text was piped into the function
+        text="$(cat 2> /dev/null)"
+    fi
+
+    counter=1
+    echo "${text}" | while IFS= read -r line; do
+        echo "widget_set s1 w${counter} 1 ${counter} \"${line}\"" >&3
+        lcd_get_response
+        (( counter++ ))
+        if (( counter > 4 )); then
+            break
+        fi
+    done
+}
+
 echo_color() {
     color="${1}"
     shift 1
