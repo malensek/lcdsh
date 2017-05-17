@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 lcd_init() {
     if [[ ${#} -ne 2 ]]; then
