@@ -102,8 +102,9 @@ lcd_show() {
     echo "${text}" | while IFS= read -r line; do
         echo "widget_set s1 w${counter} 1 ${counter} \"${line}\"" >&3
         lcd_get_response
+
         (( counter++ ))
-        if (( counter > 4 )); then
+        if (( counter > LCD_HEIGHT )); then
             break
         fi
     done
