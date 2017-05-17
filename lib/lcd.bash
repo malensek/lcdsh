@@ -8,8 +8,7 @@ lcd_init() {
     host="${1}"
     port="${2}"
 
-    exec 3<>"/dev/tcp/${host}/${port}"
-    if [[ ${?} -ne 0 ]]; then
+    if ! exec 3<>"/dev/tcp/${host}/${port}"; then
         echo_error "Could not connect to ${host}:${port}"
         return 1
     fi
