@@ -105,7 +105,7 @@ lcd_show() {
 lcd_show_line() {
     line_num="${1}"
     if [[ ${line_num} -le 0 || ${line_num} -gt ${LCD_HEIGHT} ]]; then
-        echo_error "Line ${line_num} out of bounds"
+        echo_error "Specified line (${line_num}) out of LCD bounds"
         return
     fi
     text="${2}"
