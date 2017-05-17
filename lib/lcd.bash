@@ -60,13 +60,13 @@ lcd_get_response() {
 
     if [[ -n ${1} ]]; then
         timeout=${1}
-        read -u 3 -t "${timeout}" response
+        IFS= read -r -u 3 -t "${timeout}" response
         if [[ ${?} -eq 1 ]]; then
             # Timed out
             return 3
         fi
     else
-        read -u 3 response
+        IFS= read -r -u 3 response
     fi
 
     echo "${response}"
