@@ -19,17 +19,12 @@ lcd_init() {
     export LCD_CELL_WIDTH
     export LCD_CELL_HEIGHT
 
-    if [[ ${?} -eq 0 ]]; then
-        echo "hello" >&3
-        response=$(lcd_get_response)
-        LCD_WIDTH=$(lcd_parse_info "${response}" "wid")
-        LCD_HEIGHT=$(lcd_parse_info "${response}" "hgt")
-        LCD_CELL_WIDTH=$(lcd_parse_info "${response}" "cellwid")
-        LCD_CELL_HEIGHT=$(lcd_parse_info "${response}" "cellhgt")
-    else
-        echo_error "Failed to initialize LCD connection!"
-        return 1
-    fi
+    echo "hello" >&3
+    response=$(lcd_get_response)
+    LCD_WIDTH=$(lcd_parse_info "${response}" "wid")
+    LCD_HEIGHT=$(lcd_parse_info "${response}" "hgt")
+    LCD_CELL_WIDTH=$(lcd_parse_info "${response}" "cellwid")
+    LCD_CELL_HEIGHT=$(lcd_parse_info "${response}" "cellhgt")
 
     echo "screen_add s1" >&3
 
