@@ -129,11 +129,11 @@ echo_color() {
 }
 
 echo_info() {
-    echo_color 34 "[>] ${@}"
+    echo_color 34 "[>] ${*}"
 }
 
 echo_error() {
-    echo_color 31 "[X] ${@}"
+    echo_color 31 "[X] ${*}"
 }
 
 die() {
