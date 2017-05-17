@@ -129,7 +129,7 @@ echo_color() {
         return 0
     fi
 
-    echo -e $'\e[0;'${color}'m'${@}$'\e[0m'
+    echo -e $'\e[0;'"${color}"'m'"${*}"$'\e[0m'
 }
 
 echo_info() {
