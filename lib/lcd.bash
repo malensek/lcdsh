@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
 
 lcd_init() {
-    host="${1}"
-    port="${2}"
+    port=13666
 
-    if [[ ${#} -ne 2 ]]; then
-        if [[ -z ${LCD_HOST} || -z ${LCD_PORT} ]]; then
-            echo_error "Usage: lcd_init lcd_hostname lcd_port"
-            echo_error "(or set LCD_HOST and LCD_PORT environment variables)"
-            return 1
-        else
-            host="${LCD_HOST}"
-            port="${LCD_PORT}"
-        fi
+    [[ -n ${LCD_HOST} ]] && host="${LCD_HOST}"
+    [[ -n ${LCD_PORT} ]] && port="${LCD_PORT}"
+    [[ -n ${1} ]] && host="${1}"
+    [[ -n ${2} ]] && port="${2}"
+
+    if [[ -z ${host} || -z ${port} ]]; then
+        echo_error "Usage: lcd_init hostname [port]"
+        echo_error "(or set LCD_HOST/LCD_PORT environment variables)"
+        return 1
     fi
 
     if ! exec 3<>"/dev/tcp/${host}/${port}"; then
