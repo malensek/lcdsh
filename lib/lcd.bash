@@ -119,7 +119,7 @@ echo_color() {
     num_colors=$(tput colors 2> /dev/null)
     if [[ ! -t 1 || ${num_colors} -lt 8 ]]; then
         # Not a terminal; print without color
-        echo "${@}"
+        echo "${*}"
         return 0
     fi
 
@@ -135,6 +135,6 @@ echo_error() {
 }
 
 die() {
-    echo_error "${@}"
+    echo_error "${*}"
     exit 1
 }
