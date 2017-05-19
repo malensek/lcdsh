@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 
 lcd_init() {
-    if [[ ${#} -ne 2 ]]; then
-        echo "fail"
-        return
-    fi
     host="${1}"
     port="${2}"
+
+    if [[ ${#} -ne 2 ]]; then
+        if [[ -z ${LCD_HOST} || -z ${LCD_PORT} ]]; then
+            echo_error "Usage: lcd_init lcd_hostname lcd_port"
+            echo_error "(or set LCD_HOST and LCD_PORT environment variables)"
+            return 1
+        else
+            host="${LCD_HOST}"
+            port="${LCD_PORT}"
+        fi
+    fi
 
     if ! exec 3<>"/dev/tcp/${host}/${port}"; then
         echo_error "Could not connect to ${host}:${port}"
