@@ -9,7 +9,7 @@ lcd_init() {
     [[ -n ${2} ]] && port="${2}"
 
     if [[ -z ${host} || -z ${port} ]]; then
-        echo_error "Usage: lcd_init hostname [port]"
+        echo_error "Usage: lcd_init hostname [port (${port})]"
         echo_error "(or set LCD_HOST/LCD_PORT environment variables)"
         return 1
     fi
