@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 
+# lcd_init hostname [port]
+# Where:
+# - hostname is the host driving the LCD
+# - port is the port of the LCDproc server (default: 13666)
+# Returns:
+# - 0 on success, nonzero on failure
+#
+# This function initializes the LCD. This involves:
+# - Connecting to the host driving the LCD
+# - Gathering LCD parameters (width, height, etc). These are exported as:
+#     > LCD_WIDTH
+#     > LCD_HEIGHT
+#     > LCD_CELL_WIDTH
+#     > LCD_CELL_HEIGHT
+# - Creating a screen object and the necessary text widgets (one per line)
 lcd_init() {
     port=13666
 
