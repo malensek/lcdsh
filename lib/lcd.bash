@@ -40,6 +40,7 @@ lcd_init() {
 
     echo_info "Initialized LCD session on ${host}:${port}" \
         "(${LCD_WIDTH}x${LCD_HEIGHT})"
+    return 0
 }
 
 lcd_parse_info() {
