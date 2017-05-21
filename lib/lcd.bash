@@ -48,6 +48,10 @@ lcd_parse_info() {
 
 lcd_msg_loop() {
     while true; do
+        if ! kill -0 "${PPID}"; then
+            echo "parent dead"
+        fi
+
         response=$(lcd_get_response)
         if [[ ${?} -ne 0 ]]; then
             echo "${response}"
