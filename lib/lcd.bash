@@ -122,7 +122,6 @@ lcd_show() {
     counter=1
     echo "${text}" | while IFS= read -r line; do
         echo "widget_set s1 w${counter} 1 ${counter} \"${line}\"" >&3
-        lcd_get_response
 
         (( counter++ ))
         if (( counter > LCD_HEIGHT )); then
@@ -145,7 +144,6 @@ lcd_show_line() {
     fi
 
     echo "widget_set s1 w${line_num} 1 ${line_num} \"${text}\"" >&3
-    lcd_get_response
 }
 
 echo_color() {
