@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+UPDATE_INTERVAL=2
+
 source ~/lcdsh/lib/lcd.bash
 
 if ! lcd_init beta 13666; then
@@ -27,6 +29,6 @@ while true; do
         printf "%s" "${load}"
     ) | lcd_show
 
-    sleep 2
+    sleep ${UPDATE_INTERVAL}
 done
 
