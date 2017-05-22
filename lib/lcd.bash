@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+################################################################################
+# lcdsh - A small bash 'library' for manipulating LCD displays driven by
+# LCDproc.
+#
+# Version 1
+# Matthew Malensek <matt@malensek.net>
+################################################################################
+
 
 # lcd_init hostname [port]
 # Where:
