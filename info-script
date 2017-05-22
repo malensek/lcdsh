@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+source ~/lcdsh/lib/lcd.bash
+
+if ! lcd_init beta 13666; then
+    exit 1
+fi
+
+#lcd_msg_loop &
+
+name=$(hostname)
+cpus=$( (getconf _NPROCESSORS_ONLN || getconf NPROCESSORS_ONLN) 2> /dev/null)
+
+while true; do
+    now=$(date '+%l:%M %p')
+    processes=$(ps aux | wc -l)
+    cpu_use=$(ps aux \
+        | grep --invert-match '\[idle\]' \
+        | awk '{tot += $3} END {print tot / '"${cpus}"'}')
+    mem_use=$(ps aux | awk '{tot += $4} END {print tot }')
+    load=$(uptime | awk -F'[a-z]: ' '{ print $2 }' | sed 's/,//g')
+
+    (
+        printf "%-11.11s %s\n" "${name}" "${now}"
+        printf "CPU: %.1f%%\n" "${cpu_use}"
+        printf "Mem: %.1f%%\n" "${mem_use}"
+        printf "%s" "${load}"
+    ) | lcd_show
+
+    sleep 2
+done
+
