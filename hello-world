@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Load the lcdsh library
+source ~/lcdsh/lib/lcd.bash
+
+# Connect to the LCDproc server
+if ! lcd_init beta 13666; then
+    echo_error "Couldn't connect to the LCDproc server!"
+    exit 1
+fi
+
+# Greet the world
+lcd_show "Hello world!" 
+# Or, an alternative: pipe the text to lcd_show function:
+# echo "Hello world!" | lcd_show
+
+# Listen for events from the LCDproc server
+lcd_msg_loop
