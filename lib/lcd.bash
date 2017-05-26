@@ -82,7 +82,7 @@ lcd_msg_loop() {
         fi
 
         response=$(lcd_get_response)
-        if [[ ${?} -ne 0 ]]; then
+        if [[ ${?} -ne 0 && -n "${response}" ]]; then
             echo "${response}"
         fi
     done
