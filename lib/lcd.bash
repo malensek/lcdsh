@@ -7,6 +7,7 @@
 # Matthew Malensek <matt@malensek.net>
 ################################################################################
 
+export LCD_DEFAULT_PORT=13666
 
 # lcd_init hostname [port]
 # Where:
@@ -24,7 +25,7 @@
 #     > LCD_CELL_HEIGHT
 # - Creating a screen object and the necessary text widgets (one per line)
 lcd_init() {
-    port=13666
+    port=${LCD_DEFAULT_PORT}
 
     [[ -n ${LCD_HOST} ]] && host="${LCD_HOST}"
     [[ -n ${LCD_PORT} ]] && port="${LCD_PORT}"
