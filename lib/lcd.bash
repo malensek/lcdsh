@@ -67,6 +67,23 @@ lcd_init() {
     return 0
 }
 
+lcd_init_prompt() {
+    # If the LCD_HOST environment variable is set, we don't need to ask
+    if [[ -n ${LCD_HOST} ]]; then
+        lcd_init
+        return ${?}
+    fi
+
+    host=""
+    port=""
+    echo_info "Connecting to LCDproc server..."
+    read -r -e -p "Server: " host
+    read -r -e -p "Port [${LCD_DEFAULT_PORT}]: " port
+
+    lcd_init "${host}" "${port}"
+    return ${?}
+}
+
 lcd_parse_info() {
     sed "s/.* ${2} \([0-9.]*\).*/\1/g" <<< "${1}"
 }
