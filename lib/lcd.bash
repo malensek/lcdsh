@@ -76,6 +76,10 @@ lcd_msg_loop() {
         if ! kill -0 "${PPID}"; then
             echo "parent dead"
         fi
+        if ! { true >&3; } 2> /dev/null; then
+            echo_error "Could not read file descriptor!"
+            return 1
+        fi
 
         response=$(lcd_get_response)
         if [[ ${?} -ne 0 ]]; then
