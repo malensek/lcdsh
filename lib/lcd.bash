@@ -100,7 +100,9 @@ lcd_get_response() {
             return 3
         fi
     else
-        IFS= read -r -u 3 response
+        if ! IFS= read -r -u 3 response; then
+            return 4
+        fi
     fi
 
     echo "${response}"
