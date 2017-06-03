@@ -5,5 +5,5 @@ This is a small bash 'library' for manipulating LCD displays driven by [LCDproc]
 ```bash
 lcd_init_prompt || exit 1         # Initializes LCDproc session
 echo "Hello world!" | lcd_show    # Displays our message
-lcd_msg_loop                      # Handle messages and wait for termination
+lcd_msg_loop                      # Handles messages and waits for termination
 ```
