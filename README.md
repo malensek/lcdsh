@@ -8,6 +8,6 @@ echo "Hello world!" | lcd_show    # Displays our message
 lcd_msg_loop                      # Handles messages and waits for termination
 ```
 
-Which gives us (as shown on a Crystalfontz CFA635):
+Which gives us (shown on a Crystalfontz CFA635):
 
 <img src="./doc/hello.jpg" alt="LCD Screenshot" width="50%" />
