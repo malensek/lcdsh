@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 while true; do
-now=$(vnstat -tr 2)
-rx_now=$(echo "${now}" | grep 'rx' | awk '{ print $2, $3 }')
-tx_now=$(echo "${now}" | grep 'tx' | awk '{ print $2, $3 }')
-totals=$(vnstat --oneline | awk -F';' '{printf "t_rx: %s\nt_tx: %s\n", $4, $5}')
-clear
-echo "rx:   ${rx_now}"
-echo "tx:   ${tx_now}"
-echo "${totals}"
-echo "--"
+    now=$(vnstat -tr 2 | grep '^[[:space:]]*[r|t]x' | awk '{printf "%s: %s %s\n", $1, $2, $3 }')
+#    rx_now=$(echo "${now}" | grep 'rx' | awk '{ print $2, $3 }')
+#    tx_now=$(echo "${now}" | grep 'tx' | awk '{ print $2, $3 }')
+    totals=$(vnstat --oneline | awk -F';' '{printf "t_rx: %s\nt_tx: %s\n", $4, $5}')
+    clear
+    echo "${now}"
+    #echo "tx:   ${tx_now}"
+    echo "${totals}"
+    echo "--"
 done
 
